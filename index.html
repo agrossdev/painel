@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - TV, GRV, GRR, Festão</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .links a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .premio-input {
+            margin-bottom: 10px;
+        }
+
+        .premio-container {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .rodadas-info {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .palpite-premiado-container {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .palpite-premiado-container h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .time-outro-container {
+            margin-top: 10px;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .sorteio-group {
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        
+        .sorteio-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="container" id="loginForm">
+        <h1>Painel de Controle<br>TV, GRV, GRR, Festão</h1>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Entrar</button>
+            <div class="links">
+                <a href="#" onclick="showForgotPassword()">Esqueci a senha</a>
+                <a href="#" onclick="showRegister()">Cadastrar</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Event Selection Form -->
+    <div class="container hidden" id="eventForm">
+        <h1>Selecione o Evento</h1>
+        <form id="eventSelectionForm" onsubmit="handleEventSubmit(event)">
+            <div class="form-group">
+                <label for="evento">Evento:</label>
+                <select id="evento" required onchange="handleEventChange()">
+                    <option value="">Selecione...</option>
+                    <option value="TV">TV</option>
+                    <option value="GRV">GRV</option>
+                    <option value="GRR">GRR</option>
+                    <option value="Festao">Festão</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" id="data" required>
+            </div>
+
+            <!-- Campos específicos para GRV, GRR e Festão -->
+            <div id="rodadasBolasContainer" class="hidden">
+                <div class="form-group">
+                    <label for="qtdRodadas">Quantidade de rodadas:</label>
+                    <input type="number" id="qtdRodadas" min="1" max="99" required 
+                           onchange="handleRodadasChange()">
+                </div>
+                <div class="form-group">
+                    <label for="qtdBolas">Quantidade de bolas:</label>
+                    <input type="number" id="qtdBolas" min="1" max="999" required>
+                </div>
+            </div>
+
+            <!-- Container para prêmios -->
+            <div class="form-group">
+                <div class="section-title">Prêmios:</div>
+                <div id="premiosContainer" class="premio-container">
+                    <!-- Prêmios serão inseridos dinamicamente aqui -->
+                </div>
+            </div>
+
+            <!-- Container para Palpite Premiado (apenas para TV) -->
+            <div id="palpitePremiado" class="palpite-premiado-container hidden">
+                <h3>Palpite Premiado</h3>
+                <div class="form-group">
+                    <label for="dataJogo">Data do jogo:</label>
+                    <input type="date" id="dataJogo" required>
+                </div>
+                <div class="form-group">
+                    <label for="time1">Time 1:</label>
+                    <select id="time1" onchange="handleTimeChange('time1')" required>
+                        <option value="">Selecione um time...</option>
+                        <!-- Times serão inseridos dinamicamente aqui -->
+                    </select>
+                    <div id="time1OutroContainer" class="time-outro-container hidden">
+                        <label for="time1Outro">Nome do time:</label>
+                        <input type="text" id="time1Outro" placeholder="Digite o nome do time">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="time2">Time 2:</label>
+                    <select id="time2" onchange="handleTimeChange('time2')" required>
+                        <option value="">Selecione um time...</option>
+                        <!-- Times serão inseridos dinamicamente aqui -->
+                    </select>
+                    <div id="time2OutroContainer" class="time-outro-container hidden">
+                        <label for="time2Outro">Nome do time:</label>
+                        <input type="text" id="time2Outro" placeholder="Digite o nome do time">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="outras">Outras informações:</label>
+                <textarea id="outras" rows="3"></textarea>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Register Form -->
+    <div class="container hidden" id="registerForm">
+        <h1>Cadastro de Usuário</h1>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="funcao">Função:</label>
+                <select id="funcao" required>
+                    <option value="">Selecione...</option>
+                    <option value="operador">Operador (Tudo liberado)</option>
+                    <option value="montador">Montador ("Exibir" e "Finalizar TV" desabilitados)</option>
+                    <option value="visitante">Visitante (Tudo bloqueado, apenas visualiza)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="emailAgross">Login (email AgRoss):</label>
+                <input type="email" id="emailAgross" pattern=".+@agross\.com\.br" required>
+            </div>
+            <div class="form-group">
+                <label for="senhaCadastro">Senha:</label>
+                <input type="password" id="senhaCadastro" required>
+            </div>
+            <div class="form-group">
+                <label for="repetirSenha">Repetir Senha:</label>
+                <input type="password" id="repetirSenha" required>
+            </div>
+            <button type="submit">Cadastrar</button>
+            <div class="links">
+                <a href="#" onclick="showLogin()">Voltar para Login</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Lista de times brasileiros em ordem alfabética
+        const timesBrasileiros = [
+            "América-MG",
+            "Athletico-PR",
+            "Atlético-GO",
+            "Atlético-MG",
+            "Bahia",
+            "Botafogo",
+            "Ceará",
+            "Corinthians",
+            "Coritiba",
+            "Cruzeiro",
+            "Cuiabá",
+            "Flamengo",
+            "Fluminense",
+            "Fortaleza",
+            "Goiás",
+            "Grêmio",
+            "Internacional",
+            "Juventude",
+            "Palmeiras",
+            "Red Bull Bragantino",
+            "Santos",
+            "São Paulo",
+            "Sport",
+            "Vasco da Gama",
+            "Vitória",
+            "Outro"
+        ];
+
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('eventForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        function showEventForm() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('eventForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('eventForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        function showForgotPassword() {
+            alert('Função de recuperação de senha em desenvolvimento.');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            showEventForm();
+        }
+
+        function populateTimeSelects() {
+            const time1Select = document.getElementById('time1');
+            const time2Select = document.getElementById('time2');
+            
+            // Limpa as opções existentes
+            time1Select.innerHTML = '<option value="">Selecione um time...</option>';
+            time2Select.innerHTML = '<option value="">Selecione um time...</option>';
+            
+            // Adiciona os times às listas
+            timesBrasileiros.forEach(time => {
+                const option1 = document.createElement('option');
+                option1.value = time;
+                option1.textContent = time;
+                time1Select.appendChild(option1);
+                
+                const option2 = document.createElement('option');
+                option2.value = time;
+                option2.textContent = time;
+                time2Select.appendChild(option2);
+            });
+        }
+
+        function handleTimeChange(timeId) {
+            const timeSelect = document.getElementById(timeId);
+            const outroContainer = document.getElementById(`${timeId}OutroContainer`);
+            const outroInput = document.getElementById(`${timeId}Outro`);
+            
+            if (timeSelect.value === 'Outro') {
+                outroContainer.classList.remove('hidden');
+                outroInput.required = true;
+            } else {
+                outroContainer.classList.add('hidden');
+                outroInput.required = false;
+            }
+        }
+
+        function handleEventChange() {
+            const evento = document.getElementById('evento').value;
+            const rodadasBolasContainer = document.getElementById('rodadasBolasContainer');
+            const premiosContainer = document.getElementById('premiosContainer');
+            const palpitePremiado = document.getElementById('palpitePremiado');
+            
+            // Limpa o container de prêmios
+            premiosContainer.innerHTML = '';
+            
+            if (evento === 'TV') {
+                rodadasBolasContainer.classList.add('hidden');
+                palpitePremiado.classList.remove('hidden');
+                
+                // Popula os selects de times
+                populateTimeSelects();
+                
+                // Adiciona campos para TV organizados por sorteio
+                // 1º Sorteio
+                const sorteio1 = document.createElement('div');
+                sorteio1.className = 'sorteio-group';
+                sorteio1.innerHTML = `
+                    <div class="sorteio-title">1º Sorteio:</div>
+                    <div class="premio-input">
+                        <label for="1-sorteio-centena">Centena:</label>
+                        <input type="text" id="1-sorteio-centena" required>
+                    </div>
+                    <div class="premio-input">
+                        <label for="1-sorteio-milhar">Milhar:</label>
+                        <input type="text" id="1-sorteio-milhar" required>
+                    </div>
+                `;
+                premiosContainer.appendChild(sorteio1);
+                
+                // 2º Sorteio
+                const sorteio2 = document.createElement('div');
+                sorteio2.className = 'sorteio-group';
+                sorteio2.innerHTML = `
+                    <div class="sorteio-title">2º Sorteio:</div>
+                    <div class="premio-input">
+                        <label for="2-sorteio-centena">Centena:</label>
+                        <input type="text" id="2-sorteio-centena" required>
+                    </div>
+                    <div class="premio-input">
+                        <label for="2-sorteio-milhar">Milhar:</label>
+                        <input type="text" id="2-sorteio-milhar" required>
+                    </div>
+                `;
+                premiosContainer.appendChild(sorteio2);
+                
+                // 3º Sorteio
+                const sorteio3 = document.createElement('div');
+                sorteio3.className = 'sorteio-group';
+                sorteio3.innerHTML = `
+                    <div class="sorteio-title">3º Sorteio:</div>
+                    <div class="premio-input">
+                        <label for="3-sorteio-centena">Centena:</label>
+                        <input type="text" id="3-sorteio-centena" required>
+                    </div>
+                    <div class="premio-input">
+                        <label for="3-sorteio-milhar">Milhar:</label>
+                        <input type="text" id="3-sorteio-milhar" required>
+                    </div>
+                `;
+                premiosContainer.appendChild(sorteio3);
+                
+                // Prêmio Extra
+                const premioExtra = document.createElement('div');
+                premioExtra.className = 'premio-input';
+                premioExtra.innerHTML = `
+                    <label for="premio-extra">Prêmio Extra:</label>
+                    <input type="text" id="premio-extra" required>
+                `;
+                premiosContainer.appendChild(premioExtra);
+                
+            } else if (['GRV', 'GRR', 'Festao'].includes(evento)) {
+                rodadasBolasContainer.classList.remove('hidden');
+                palpitePremiado.classList.add('hidden');
+                document.getElementById('qtdRodadas').value = '';
+                document.getElementById('qtdBolas').value = '';
+            }
+        }
+
+        function handleRodadasChange() {
+            const qtdRodadas = parseInt(document.getElementById('qtdRodadas').value);
+            const premiosContainer = document.getElementById('premiosContainer');
+            
+            // Limpa o container de prêmios
+            premiosContainer.innerHTML = '';
+            
+            // Adiciona campos de prêmios baseado no número de rodadas
+            for (let i = 1; i <= qtdRodadas; i++) {
+                const div = document.createElement('div');
+                div.className = 'premio-input';
+                div.innerHTML = `
+                    <label for="premio-rodada-${i}">Prêmio ${i}ª rodada:</label>
+                    <input type="text" id="premio-rodada-${i}" required>
+                `;
+                premiosContainer.appendChild(div);
+            }
+        }
+
+        function handleEventSubmit(event) {
+            event.preventDefault();
+            
+            // Validações
+            const evento = document.getElementById('evento').value;
+            if (['GRV', 'GRR', 'Festao'].includes(evento)) {
+                const qtdRodadas = document.getElementById('qtdRodadas').value;
+                const qtdBolas = document.getElementById('qtdBolas').value;
+                
+                if (qtdRodadas > 99) {
+                    alert('A quantidade de rodadas não pode ser maior que 99!');
+                    return;
+                }
+                if (qtdBolas > 999) {
+                    alert('A quantidade de bolas não pode ser maior que 999!');
+                    return;
+                }
+            } else if (evento === 'TV') {
+                // Validação para Palpite Premiado
+                const time1 = document.getElementById('time1').value;
+                const time2 = document.getElementById('time2').value;
+                
+                if (time1 === time2 && time1 !== 'Outro') {
+                    alert('Os times 1 e 2 não podem ser iguais!');
+                    return;
+                }
+                
+                if (time1 === 'Outro' && !document.getElementById('time1Outro').value) {
+                    alert('Por favor, informe o nome do Time 1!');
+                    return;
+                }
+                
+                if (time2 === 'Outro' && !document.getElementById('time2Outro').value) {
+                    alert('Por favor, informe o nome do Time 2!');
+                    return;
+                }
+            }
+            
+            // Redirecionar para painel.html
+            console.log("Redirecionando para painel.html");
+            
+            // Forçar o redirecionamento de duas maneiras diferentes para garantir que funcione
+            try {
+                window.location.href = 'painel.html';
+                
+                // Se o redirecionamento acima não funcionar, tente este após um pequeno atraso
+                setTimeout(function() {
+                    window.location.replace('painel.html');
+                }, 100);
+            } catch (e) {
+                console.error("Erro ao redirecionar:", e);
+                alert("Erro ao redirecionar. Tentando novamente...");
+                window.location = 'painel.html';
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const senha = document.getElementById('senhaCadastro').value;
+            const repetirSenha = document.getElementById('repetirSenha').value;
+            const email = document.getElementById('emailAgross').value;
+
+            if (senha !== repetirSenha) {
+                alert('As senhas não coincidem!');
+                return;
+            }
+
+            if (!email.endsWith('@agross.com.br')) {
+                alert('Por favor, use um email AgRoss válido.');
+                return;
+            }
+
+            alert('Um email de confirmação foi enviado para o Marketing AgRoss, aguarde a liberação.');
+            showLogin();
+        }
+    </script>
+</body>
+</html>

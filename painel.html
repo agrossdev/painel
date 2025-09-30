@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Sorteio NF Premiada</title>
+    <link rel="stylesheet" href="painel.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="main-panel">
+            <div class="header">
+                <h2>Painel AO VIVO   TV: 03/04/2025 | Usuário: Guido Possi</h2>
+                <div>
+                    <button class="btn btn-red" id="finalizarTv">Finalizar TV de hoje</button>
+                    <button class="btn btn-gray">⚙️ Configurações</button>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-green" id="sorteioNF">Sorteio NF Premiada</button>
+                <button class="btn btn-gray btn-with-badge" id="premioExtra">Prêmio Extra<span class="notification-badge">3</span></button>
+                <button class="btn btn-gray btn-with-badge" id="palpite">Palpite Premiado<span class="notification-badge">5</span></button>
+                <button class="btn btn-gray btn-with-badge" id="audiencia">Audiência<span class="notification-badge">2</span></button>
+                <button class="btn btn-gray btn-with-badge" id="fotos">Fotos / Comentários<span class="notification-badge">7</span></button>
+                <button class="btn btn-gray" id="sorteioGRV">Sorteio GRV/GRR/Festão</button>
+                <button class="btn btn-gray" id="premiacoes">Premiações</button>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-red" id="finalizarSorteio">Finalizar 1º Sorteio</button>
+                <button class="btn btn-green" id="primeiroSorteio">1º Sorteio</button>
+                <button class="btn btn-gray" id="segundoSorteio">2º Sorteio</button>
+                <button class="btn btn-gray" id="terceiroSorteio">3º Sorteio</button>
+            </div>
+
+            <div class="number-input-container">
+                <div class="number-input-label">Números sorteados:</div>
+                <div class="number-input">
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num1" value="4">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num2" value="3">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num3" value="2">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num4" value="1">
+                    </div>
+                </div>
+                <div class="total-info">Total: 10 notas, 8 <span class="centena">Centena</span> / 2 <span class="milhar">Milhar</span></div>
+            </div>
+
+            <div class="tables-container">
+                <div class="table-section">
+                    <div class="section-title">Batidas (<span class="centena">Centena</span>=2 / <span class="milhar">Milhar</span>=1)</div>
+                    <div class="table-container">
+                        <table id="batidasTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">Selecionar</th>
+                                    <th class="fixed-column" style="width: 150px;">Razão Social</th>
+                                    <th style="width: 150px;">Nome Fantasia</th>
+                                    <th style="width: 30px;"><span class="on-text">On</span></th>
+                                    <th style="width: 80px;">NF/Carnê</th>
+                                    <th style="width: 100px;">Unidade</th>
+                                    <th style="width: 130px;">Cidade/UF</th>
+                                    <th style="width: 60px;">Batida</th>
+                                    <th style="width: 100px;">Inadimplente</th>
+                                    <th style="width: 100px;">CNPJ</th>
+                                    <th style="width: 180px;">Palpite</th>
+                                    <th style="width: 100px;">Prêmio(s)</th>
+                                    <th style="width: 80px;">Quant. NF</th>
+                                    <th style="width: 120px;">Contato</th>
+                                    <th style="width: 120px;">Contato "TV"</th>
+                                    <th style="width: 150px;">Contato vendedor/gerente</th>
+                                    <th colspan="5" style="text-align: center;">Prêmios</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="fixed-column" colspan="1"></th>
+                                    <th colspan="14"></th>
+                                    <th style="width: 50px;">Extra</th>
+                                    <th style="width: 50px;">Centena</th>
+                                    <th style="width: 50px;">Milhar</th>
+                                    <th style="width: 50px;">Moto</th>
+                                    <th style="width: 50px;">Carro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select1"></td>
+                                    <td class="fixed-column">Comercio de Insumos</td>
+                                    <td>Braga Araújo</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-centena">C</span> 9321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Pirapora Nosa/MG</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Flamengo 3 x 1 Vasco</td>
+                                    <td>Centena</td>
+                                    <td>12</td>
+                                    <td>(32) 9 9563-9130</td>
+                                    <td>(32) 9 9563-9130</td>
+                                    <td>João Silva (32) 9 8765-4321</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select2"></td>
+                                    <td class="fixed-column">Agro Revenda LTDA</td>
+                                    <td>NULL</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-centena">C</span> 0321</td>
+                                    <td>Paulinia</td>
+                                    <td>São Paulo/SP</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Corinthians 2 x 0 Palmeiras</td>
+                                    <td>Centena</td>
+                                    <td>8</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Maria Oliveira (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select3"></td>
+                                    <td class="fixed-column">Sag Agricola EIRELI</td>
+                                    <td>Sag Agricola</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-milhar">M</span> 4321</td>
+                                    <td>Carazinho</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>São Paulo 4 x 2 Santos</td>
+                                    <td>Milhar</td>
+                                    <td>15</td>
+                                    <td>(12) 9 9563-91</td>
+                                    <td>(12) 9 9563-91</td>
+                                    <td>Carlos Santos (12) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-section">
+                    <div class="section-title">Possibilidades (+7)</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">Selecionar</th>
+                                    <th class="fixed-column" style="width: 150px;">Razão Social</th>
+                                    <th style="width: 150px;">Nome Fantasia</th>
+                                    <th style="width: 30px;"><span class="on-text">On</span></th>
+                                    <th style="width: 80px;">NF/Carnê</th>
+                                    <th style="width: 100px;">Unidade</th>
+                                    <th style="width: 130px;">Cidade/UF</th>
+                                    <th style="width: 60px;">Batida</th>
+                                    <th style="width: 100px;">Inadimplente</th>
+                                    <th style="width: 100px;">CNPJ</th>
+                                    <th style="width: 180px;">Palpite</th>
+                                    <th style="width: 100px;">Prêmio(s)</th>
+                                    <th style="width: 80px;">Quant. NF</th>
+                                    <th style="width: 120px;">Contato</th>
+                                    <th style="width: 120px;">Contato "TV"</th>
+                                    <th style="width: 150px;">Contato vendedor/gerente</th>
+                                    <th colspan="5" style="text-align: center;">Prêmios</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="fixed-column" colspan="1"></th>
+                                    <th colspan="14"></th>
+                                    <th style="width: 50px;">Extra</th>
+                                    <th style="width: 50px;">Centena</th>
+                                    <th style="width: 50px;">Milhar</th>
+                                    <th style="width: 50px;">Moto</th>
+                                    <th style="width: 50px;">Carro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select4"></td>
+                                    <td class="fixed-column">Agrosul Agrovicola</td>
+                                    <td>Agrosul Agrovicola</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 9321</td>
+                                    <td>Petrolina</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Grêmio 1 x 1 Internacional</td>
+                                    <td>—</td>
+                                    <td>23</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Ana Pereira (19) 9 8765-4321</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select5"></td>
+                                    <td class="fixed-column">MM Campinas Com</td>
+                                    <td>MM Campinas</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 9321</td>
+                                    <td>Cariocica</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Atlético-MG 3 x 0 Cruzeiro</td>
+                                    <td>—</td>
+                                    <td>17</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Paulo Souza (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="cliente-inadimplente">
+                                    <td style="text-align: center;"><input type="checkbox" name="select6"></td>
+                                    <td class="fixed-column">Casa da Lavoura de</td>
+                                    <td>Casa da Lavoura de Campos</td>
+                                    <td><span class="status-dot" style="background-color: red;"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 4321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td class="inadimplente-red">845,30</td>
+                                    <td>07634924...</td>
+                                    <td>Fluminense 2 x 3 Botafogo</td>
+                                    <td>—</td>
+                                    <td>9</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Roberto Lima (19) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select7"></td>
+                                    <td class="fixed-column">Neylor Faber Sepulveda</td>
+                                    <td>Neylor Faber</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 1321</td>
+                                    <td>Lins</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Bahia 0 x 2 Vitória</td>
+                                    <td>Extra</td>
+                                    <td>14</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Fernanda Costa (19) 9 8765-4321</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select8"></td>
+                                    <td class="fixed-column">Advantagro Comercial</td>
+                                    <td>Advantagro</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 5321</td>
+                                    <td>Pouso Alegre</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Fortaleza 1 x 0 Ceará</td>
+                                    <td>Moto</td>
+                                    <td>31</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Lucas Almeida (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select9"></td>
+                                    <td class="fixed-column">Comercio Advantagro</td>
+                                    <td>Agro Vila Nova</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 2321</td>
+                                    <td>Anápolis</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Goiás 2 x 1 Atlético-GO</td>
+                                    <td>Carro</td>
+                                    <td>42</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Juliana Martins (19) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select10"></td>
+                                    <td class="fixed-column">Agrícola Pinhotti &</td>
+                                    <td>Pinhotti & Vilela</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 6321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Athletico-PR 3 x 2 Coritiba</td>
+                                    <td>Extra, Centena</td>
+                                    <td>27</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Ricardo Oliveira (19) 9 8765-4321</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-panel">
+            <div class="side-panel-title">Painel Exibir: NF Premiada/Extra/Fotos</div>
+            <button class="btn btn-red" style="width: 100%; margin-bottom: 20px;">Editar imagens de fundo</button>
+
+            <div class="preview-section">
+                <div class="preview-content">
+                    <div>
+                        <div class="preview-label">Sorteado</div>
+                        <img src="imagem01.jpg" alt="Sorteado" class="preview-image">
+                    </div>
+                    <div>
+                        <div class="preview-label">Neutro</div>
+                        <img src="imagem02.jpg" alt="Neutro" class="preview-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-section">
+                    <div class="sorteio-title">1º Sorteio</div>
+                    <div class="preview-content">
+                        <!-- <img src="imagem03.jpg" alt="1º Sorteio" class="preview-image" id="primeiro-sorteio-img"> -->
+                        <div class="preview-box" id="primeiro-sorteio-img"></div>
+                        <div class="preview-box" id="primeiro-sorteio-img-dois"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="sorteio-title">2º Sorteio</div>
+                    <div class="preview-content">
+                        <div class="preview-box"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="sorteio-title">3º Sorteio</div>
+                    <div class="preview-content">
+                        <div class="preview-box"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section" style="margin-top: 20px;">
+                <div class="preview-header">
+                    <button class="btn btn-green">Fotos</button>
+                    <button class="btn btn-gray">Comentários</button>
+                </div>
+                <div class="photos-section">
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para exibir a imagem em tamanho grande -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-content">
+            <!-- <img src="imagem04.jpg" alt="Prêmio CENTENA" class="modal-image" id="modalImage"> -->
+            
+            <div class="modal-buttons">
+                <button class="btn btn-green" id="btnExibir">Exibir</button>
+                <button class="btn btn-gray" id="btnMinimizar">Minimizar</button>
+                <button class="btn btn-gray" id="btnEditar">Editar</button>
+            </div>
+            
+            <div class="edit-form" id="editForm">
+                <div>
+                    <label for="batida1">1ª Batida:</label>
+                    <input type="text" id="batida1" value="Braga Araújo">
+                </div>
+                <div>
+                    <label for="unidade1">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade1" value="Pirapora Nossa/MG | UNIDADE: Sete Lagoas">
+                </div>
+                <div>
+                    <label for="batida2">2ª Batida:</label>
+                    <input type="text" id="batida2" value="Agro Revenda LTDA">
+                </div>
+                <div>
+                    <label for="unidade2">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="SÃO PAULO-SP | UNIDADE: Paulínia">
+                </div>
+                <button class="btn btn-green" style="width: 100%; margin-top: 15px;" id="btnSalvar">Salvar alteração</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Segundo modal -->
+    <div class="modal-overlay" id="imageModal2">
+        <div class="modal-content-dois">
+            <!-- <img src="imagem04.jpg" alt="Prêmio CENTENA" class="modal-image" id="modalImage2"> -->
+            
+            <div class="modal-buttons">
+                <button class="btn btn-green" id="btnExibir2">Exibir</button>
+                <button class="btn btn-gray" id="btnMinimizar2">Minimizar</button>
+                <button class="btn btn-gray" id="btnEditar2">Editar</button>
+            </div>
+            
+            <div class="edit-form" id="editForm">
+                <div>
+                    <label for="batida1">1ª Batida:</label>
+                    <input type="text" id="batida2" value="Braga Araújo">
+                </div>
+                <div>
+                    <label for="unidade1">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="Pirapora Nossa/MG | UNIDADE: Sete Lagoas">
+                </div>
+                <div>
+                    <label for="batida2">2ª Batida:</label>
+                    <input type="text" id="batida2" value="Agro Revenda LTDA">
+                </div>
+                <div>
+                    <label for="unidade2">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="SÃO PAULO-SP | UNIDADE: Paulínia">
+                </div>
+                <button class="btn btn-green" style="width: 100%; margin-top: 15px;" id="btnSalvar">Salvar alteração</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="painel.js"></script>
+  
+</body>
+</html>
