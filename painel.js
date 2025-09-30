@@ -687,32 +687,59 @@ document.querySelectorAll('.number-box input').forEach(input => {
     });
 });
 
-// Refatoração para reduzir a quantidade de ifs
-const backgroundImageMap = {
-    milhar: {
-        0: '',
-        1: "url('Ganhador-Milhar.jpg')",
-        more: "url('Bola-Maior-Milhar.jpg')"
-    },
-    centena: {
-        0: '',
-        1: "url('Ganhador-Centena.jpg')",
-        more: "url('Bola-Maior-Centena.jpg')"
-    }
-};
+// Função para limitar a seleção de checkboxes
+function limitarSelecaoCheckboxes(tipo, limite) {
+    const checkboxes = document.querySelectorAll(`#batidasTable tbody input[type="checkbox"]`);
 
-function setBackgroundImage(count, element, type) {
-    if (count === 0) {
-        element.style.backgroundImage = backgroundImageMap[type][0];
-    } else if (count === 1) {
-        element.style.backgroundImage = backgroundImageMap[type][1];
-        element.style.backgroundSize = 'cover';
-    } else if (count > 1) {
-        element.style.backgroundImage = backgroundImageMap[type].more;
-        element.style.backgroundSize = 'cover';
+    let count = 0;
+    checkboxes.forEach(checkbox => {
+        const linha = checkbox.closest('tr');
+        const nfCell = linha.querySelector('td.nf');
+        if (nfCell && nfCell.querySelector(`.nf-${tipo}`)) {
+            if (checkbox.checked) {
+                count++;
+            }
+        }
+    });
+
+    if (count > limite) {
+        alert(`Você só pode selecionar até ${limite} checkboxes do tipo ${tipo}.`);
+        return false;
+    }
+
+    return true;
+}
+
+// Adicionar evento para limitar a seleção
+batidasTable.addEventListener('change', (event) => {
+    if (event.target && event.target.matches('input[type="checkbox"]')) {
+        const linha = event.target.closest('tr');
+        const nfCell = linha.querySelector('td.nf');
+
+        if (nfCell) {
+            if (nfCell.querySelector('.nf-milhar')) {
+                if (!limitarSelecaoCheckboxes('milhar', 4)) {
+                    event.target.checked = false;
+                }
+            } else if (nfCell.querySelector('.nf-centena')) {
+                if (!limitarSelecaoCheckboxes('centena', 4)) {
+                    event.target.checked = false;
+                }
+            }
+        }
+    }
+});
+
+// Função para impedir a seleção de checkboxes com a classe cliente-nadimplete
+function impedirSelecaoClientesNadimplete(event) {
+    if (event.target && event.target.matches('input[type="checkbox"]')) {
+        const linha = event.target.closest('tr');
+        if (linha && linha.classList.contains('cliente-inadimplente')) {
+            alert('Não é permitido selecionar clientes inadimplentes.');
+            event.target.checked = false;
+        }
     }
 }
 
-// Aplicação da função refatorada
-setBackgroundImage(countMilhar, primeiroSorteioImg, 'milhar');
-setBackgroundImage(countCentena, primeiroSorteioImgDois, 'centena');
+// Adicionar evento para impedir a seleção
+batidasTable.addEventListener('change', impedirSelecaoClientesNadimplete);
