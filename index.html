@@ -3,557 +3,503 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle - TV, GRV, GRR, Festão</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        button {
-            width: 100%;
-            padding: 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .links {
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .links a {
-            color: #4CAF50;
-            text-decoration: none;
-            margin: 0 0.5rem;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .premio-input {
-            margin-bottom: 10px;
-        }
-
-        .premio-container {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-
-        .rodadas-info {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-        }
-
-        .palpite-premiado-container {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        .palpite-premiado-container h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.1rem;
-        }
-
-        .time-outro-container {
-            margin-top: 10px;
-        }
-
-        .section-title {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .sorteio-group {
-            border: 1px solid #eee;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            background-color: #fafafa;
-        }
-        
-        .sorteio-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-    </style>
+    <title>Painel de Sorteio NF Premiada</title>
+    <link rel="stylesheet" href="painel.css">
 </head>
 <body>
-    <!-- Login Form -->
-    <div class="container" id="loginForm">
-        <h1>Painel de Controle<br>TV, GRV, GRR, Festão</h1>
-        <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label for="login">Login:</label>
-                <input type="text" id="login" required>
+    
+    <div class="container">
+        <div class="main-panel">
+            <div class="header">
+                <h2>Painel AO VIVO   TV: 03/04/2025 | Usuário: Guido Possi</h2>
+                <div>
+                    <button class="btn btn-red" id="finalizarTv">Finalizar TV de hoje</button>
+                    <button class="btn btn-gray">⚙️ Configurações</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" required>
+
+            <div class="btn-group">
+                <button class="btn btn-green" id="sorteioNF">Sorteio NF Premiada</button>
+                <button class="btn btn-gray btn-with-badge" id="premioExtra">Prêmio Extra<span class="notification-badge">3</span></button>
+                <button class="btn btn-gray btn-with-badge" id="palpite">Palpite Premiado<span class="notification-badge">5</span></button>
+                <button class="btn btn-gray btn-with-badge" id="audiencia">Audiência<span class="notification-badge">2</span></button>
+                <button class="btn btn-gray btn-with-badge" id="fotos">Fotos / Comentários<span class="notification-badge">7</span></button>
+                <button class="btn btn-gray" id="sorteioGRV">Sorteio GRV/GRR/Festão</button>
+                <button class="btn btn-gray" id="premiacoes">Premiações</button>
             </div>
-            <button type="submit">Entrar</button>
-            <div class="links">
-                <a href="#" onclick="showForgotPassword()">Esqueci a senha</a>
-                <a href="#" onclick="showRegister()">Cadastrar</a>
+
+            <div class="btn-group">
+                <button class="btn btn-red" id="finalizarSorteio">Finalizar 1º Sorteio</button>
+                <button class="btn btn-green" id="primeiroSorteio">1º Sorteio</button>
+                <button class="btn btn-gray" id="segundoSorteio">2º Sorteio</button>
+                <button class="btn btn-gray" id="terceiroSorteio">3º Sorteio</button>
             </div>
-        </form>
+
+            <div class="number-input-container">
+                <div class="number-input-label">Números sorteados:</div>
+                <div class="number-input">
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num1" value="4">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num2" value="3">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num3" value="2">
+                    </div>
+                    <div class="number-box">
+                        <input type="text" maxlength="1" pattern="[0-9]" id="num4" value="1">
+                    </div>
+                </div>
+                <div class="total-info">Total: 10 notas, 8 <span class="centena">Centena</span> / 2 <span class="milhar">Milhar</span></div>
+            </div>
+
+            <div class="tables-container">
+                <div class="table-section">
+                    <div class="section-title">Batidas (<span class="centena">Centena</span>=2 / <span class="milhar">Milhar</span>=1)</div>
+                    <div class="table-container">
+                        <table id="batidasTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">Selecionar</th>
+                                    <th class="fixed-column" style="width: 150px;">Razão Social</th>
+                                    <th style="width: 150px;">Nome Fantasia</th>
+                                    <th style="width: 30px;"><span class="on-text">On</span></th>
+                                    <th style="width: 80px;">NF/Carnê</th>
+                                    <th style="width: 100px;">Unidade</th>
+                                    <th style="width: 130px;">Cidade/UF</th>
+                                    <th style="width: 60px;">Batida</th>
+                                    <th style="width: 100px;">Inadimplente</th>
+                                    <th style="width: 100px;">CNPJ</th>
+                                    <th style="width: 180px;">Palpite</th>
+                                    <th style="width: 100px;">Prêmio(s)</th>
+                                    <th style="width: 80px;">Quant. NF</th>
+                                    <th style="width: 120px;">Contato</th>
+                                    <th style="width: 120px;">Contato "TV"</th>
+                                    <th style="width: 150px;">Contato vendedor/gerente</th>
+                                    <th colspan="5" style="text-align: center;">Prêmios</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="fixed-column" colspan="1"></th>
+                                    <th colspan="14"></th>
+                                    <th style="width: 50px;">Extra</th>
+                                    <th style="width: 50px;">Centena</th>
+                                    <th style="width: 50px;">Milhar</th>
+                                    <th style="width: 50px;">Moto</th>
+                                    <th style="width: 50px;">Carro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select1"></td>
+                                    <td class="fixed-column">Comercio de Insumos</td>
+                                    <td>Braga Araújo</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-centena">C</span> 9321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Pirapora Nosa/MG</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Flamengo 3 x 1 Vasco</td>
+                                    <td>Centena</td>
+                                    <td>12</td>
+                                    <td>(32) 9 9563-9130</td>
+                                    <td>(32) 9 9563-9130</td>
+                                    <td>João Silva (32) 9 8765-4321</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select2"></td>
+                                    <td class="fixed-column">Agro Revenda LTDA</td>
+                                    <td>NULL</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-centena">C</span> 0321</td>
+                                    <td>Paulinia</td>
+                                    <td>São Paulo/SP</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Corinthians 2 x 0 Palmeiras</td>
+                                    <td>Centena</td>
+                                    <td>8</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Maria Oliveira (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select3"></td>
+                                    <td class="fixed-column">Sag Agricola EIRELI</td>
+                                    <td>Sag Agricola</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td><span class="nf-milhar">M</span> 4321</td>
+                                    <td>Carazinho</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>São Paulo 4 x 2 Santos</td>
+                                    <td>Milhar</td>
+                                    <td>15</td>
+                                    <td>(12) 9 9563-91</td>
+                                    <td>(12) 9 9563-91</td>
+                                    <td>Carlos Santos (12) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-section">
+                    <div class="section-title">Possibilidades (+7)</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">Selecionar</th>
+                                    <th class="fixed-column" style="width: 150px;">Razão Social</th>
+                                    <th style="width: 150px;">Nome Fantasia</th>
+                                    <th style="width: 30px;"><span class="on-text">On</span></th>
+                                    <th style="width: 80px;">NF/Carnê</th>
+                                    <th style="width: 100px;">Unidade</th>
+                                    <th style="width: 130px;">Cidade/UF</th>
+                                    <th style="width: 60px;">Batida</th>
+                                    <th style="width: 100px;">Inadimplente</th>
+                                    <th style="width: 100px;">CNPJ</th>
+                                    <th style="width: 180px;">Palpite</th>
+                                    <th style="width: 100px;">Prêmio(s)</th>
+                                    <th style="width: 80px;">Quant. NF</th>
+                                    <th style="width: 120px;">Contato</th>
+                                    <th style="width: 120px;">Contato "TV"</th>
+                                    <th style="width: 150px;">Contato vendedor/gerente</th>
+                                    <th colspan="5" style="text-align: center;">Prêmios</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="fixed-column" colspan="1"></th>
+                                    <th colspan="14"></th>
+                                    <th style="width: 50px;">Extra</th>
+                                    <th style="width: 50px;">Centena</th>
+                                    <th style="width: 50px;">Milhar</th>
+                                    <th style="width: 50px;">Moto</th>
+                                    <th style="width: 50px;">Carro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select4"></td>
+                                    <td class="fixed-column">Agrosul Agrovicola</td>
+                                    <td>Agrosul Agrovicola</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 9321</td>
+                                    <td>Petrolina</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Grêmio 1 x 1 Internacional</td>
+                                    <td>—</td>
+                                    <td>23</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Ana Pereira (19) 9 8765-4321</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select5"></td>
+                                    <td class="fixed-column">MM Campinas Com</td>
+                                    <td>MM Campinas</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 9321</td>
+                                    <td>Cariocica</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Atlético-MG 3 x 0 Cruzeiro</td>
+                                    <td>—</td>
+                                    <td>17</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Paulo Souza (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="cliente-inadimplente">
+                                    <td style="text-align: center;"><input type="checkbox" name="select6"></td>
+                                    <td class="fixed-column">Casa da Lavoura de</td>
+                                    <td>Casa da Lavoura de Campos</td>
+                                    <td><span class="status-dot" style="background-color: red;"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 4321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td class="inadimplente-red">845,30</td>
+                                    <td>07634924...</td>
+                                    <td>Fluminense 2 x 3 Botafogo</td>
+                                    <td>—</td>
+                                    <td>9</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Roberto Lima (19) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select7"></td>
+                                    <td class="fixed-column">Neylor Faber Sepulveda</td>
+                                    <td>Neylor Faber</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 1321</td>
+                                    <td>Lins</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Bahia 0 x 2 Vitória</td>
+                                    <td>Extra</td>
+                                    <td>14</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Fernanda Costa (19) 9 8765-4321</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select8"></td>
+                                    <td class="fixed-column">Advantagro Comercial</td>
+                                    <td>Advantagro</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 5321</td>
+                                    <td>Pouso Alegre</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Fortaleza 1 x 0 Ceará</td>
+                                    <td>Moto</td>
+                                    <td>31</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Lucas Almeida (19) 9 8877-6655</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select9"></td>
+                                    <td class="fixed-column">Comercio Advantagro</td>
+                                    <td>Agro Vila Nova</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 2321</td>
+                                    <td>Anápolis</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Goiás 2 x 1 Atlético-GO</td>
+                                    <td>Carro</td>
+                                    <td>42</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Juliana Martins (19) 9 9876-5432</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"><input type="checkbox" name="select10"></td>
+                                    <td class="fixed-column">Agrícola Pinhotti &</td>
+                                    <td>Pinhotti & Vilela</td>
+                                    <td><span class="status-dot"></span></td>
+                                    <td class="nf"><span class="tipo"></span> 6321</td>
+                                    <td>Sete Lagoas</td>
+                                    <td>Rio Grande do Sul/RS</td>
+                                    <td>16:32</td>
+                                    <td>—</td>
+                                    <td>07634924...</td>
+                                    <td>Athletico-PR 3 x 2 Coritiba</td>
+                                    <td>Extra, Centena</td>
+                                    <td>27</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>(19) 9 9563-9130</td>
+                                    <td>Ricardo Oliveira (19) 9 8765-4321</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-panel">
+            <div class="side-panel-title">Painel Exibir: NF Premiada/Extra/Fotos</div>
+            <button class="btn btn-red" style="width: 100%; margin-bottom: 20px;">Editar imagens de fundo</button>
+
+            <div class="preview-section">
+                <div class="preview-content">
+                    <div>
+                        <div class="preview-label">Sorteado</div>
+                        <img src="imagem01.jpg" alt="Sorteado" class="preview-image">
+                    </div>
+                    <div>
+                        <div class="preview-label">Neutro</div>
+                        <img src="imagem02.jpg" alt="Neutro" class="preview-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-section">
+                    <div class="sorteio-title">1º Sorteio</div>
+                    <div class="preview-content">
+                        <!-- <img src="imagem03.jpg" alt="1º Sorteio" class="preview-image" id="primeiro-sorteio-img"> -->
+                        <div class="preview-box" id="primeiro-sorteio-img"></div>
+                        <div class="preview-box" id="primeiro-sorteio-img-dois"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="sorteio-title">2º Sorteio</div>
+                    <div class="preview-content">
+                        <div class="preview-box"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="sorteio-title">3º Sorteio</div>
+                    <div class="preview-content">
+                        <div class="preview-box"></div>
+                        <div class="preview-box"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section" style="margin-top: 20px;">
+                <div class="preview-header">
+                    <button class="btn btn-green">Fotos</button>
+                    <button class="btn btn-gray">Comentários</button>
+                </div>
+                <div class="photos-section">
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                    <div class="photo-box"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Event Selection Form -->
-    <div class="container hidden" id="eventForm">
-        <h1>Selecione o Evento</h1>
-        <form id="eventSelectionForm" onsubmit="handleEventSubmit(event)">
-            <div class="form-group">
-                <label for="evento">Evento:</label>
-                <select id="evento" required onchange="handleEventChange()">
-                    <option value="">Selecione...</option>
-                    <option value="TV">TV</option>
-                    <option value="GRV">GRV</option>
-                    <option value="GRR">GRR</option>
-                    <option value="Festao">Festão</option>
-                </select>
+    <!-- Modal para exibir a imagem em tamanho grande -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-content">
+            <!-- <img src="imagem04.jpg" alt="Prêmio CENTENA" class="modal-image" id="modalImage"> -->
+            
+            <div class="modal-buttons">
+                <button class="btn btn-green" id="btnExibir">Exibir</button>
+                <button class="btn btn-gray" id="btnMinimizar">Minimizar</button>
+                <button class="btn btn-gray" id="btnEditar">Editar</button>
             </div>
-            <div class="form-group">
-                <label for="data">Data:</label>
-                <input type="date" id="data" required>
+            
+            <div class="edit-form" id="editForm">
+                <div>
+                    <label for="batida1">1ª Batida:</label>
+                    <input type="text" id="batida1" value="Braga Araújo">
+                </div>
+                <div>
+                    <label for="unidade1">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade1" value="Pirapora Nossa/MG | UNIDADE: Sete Lagoas">
+                </div>
+                <div>
+                    <label for="batida2">2ª Batida:</label>
+                    <input type="text" id="batida2" value="Agro Revenda LTDA">
+                </div>
+                <div>
+                    <label for="unidade2">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="SÃO PAULO-SP | UNIDADE: Paulínia">
+                </div>
+                <button class="btn btn-green" style="width: 100%; margin-top: 15px;" id="btnSalvar">Salvar alteração</button>
             </div>
-
-            <!-- Campos específicos para GRV, GRR e Festão -->
-            <div id="rodadasBolasContainer" class="hidden">
-                <div class="form-group">
-                    <label for="qtdRodadas">Quantidade de rodadas:</label>
-                    <input type="number" id="qtdRodadas" min="1" max="99" required 
-                           onchange="handleRodadasChange()">
-                </div>
-                <div class="form-group">
-                    <label for="qtdBolas">Quantidade de bolas:</label>
-                    <input type="number" id="qtdBolas" min="1" max="999" required>
-                </div>
-            </div>
-
-            <!-- Container para prêmios -->
-            <div class="form-group">
-                <div class="section-title">Prêmios:</div>
-                <div id="premiosContainer" class="premio-container">
-                    <!-- Prêmios serão inseridos dinamicamente aqui -->
-                </div>
-            </div>
-
-            <!-- Container para Palpite Premiado (apenas para TV) -->
-            <div id="palpitePremiado" class="palpite-premiado-container hidden">
-                <h3>Palpite Premiado</h3>
-                <div class="form-group">
-                    <label for="dataJogo">Data do jogo:</label>
-                    <input type="date" id="dataJogo" required>
-                </div>
-                <div class="form-group">
-                    <label for="time1">Time 1:</label>
-                    <select id="time1" onchange="handleTimeChange('time1')" required>
-                        <option value="">Selecione um time...</option>
-                        <!-- Times serão inseridos dinamicamente aqui -->
-                    </select>
-                    <div id="time1OutroContainer" class="time-outro-container hidden">
-                        <label for="time1Outro">Nome do time:</label>
-                        <input type="text" id="time1Outro" placeholder="Digite o nome do time">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="time2">Time 2:</label>
-                    <select id="time2" onchange="handleTimeChange('time2')" required>
-                        <option value="">Selecione um time...</option>
-                        <!-- Times serão inseridos dinamicamente aqui -->
-                    </select>
-                    <div id="time2OutroContainer" class="time-outro-container hidden">
-                        <label for="time2Outro">Nome do time:</label>
-                        <input type="text" id="time2Outro" placeholder="Digite o nome do time">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="outras">Outras informações:</label>
-                <textarea id="outras" rows="3"></textarea>
-            </div>
-            <button type="submit">Entrar</button>
-        </form>
+        </div>
     </div>
 
-    <!-- Register Form -->
-    <div class="container hidden" id="registerForm">
-        <h1>Cadastro de Usuário</h1>
-        <form onsubmit="handleRegister(event)">
-            <div class="form-group">
-                <label for="funcao">Função:</label>
-                <select id="funcao" required>
-                    <option value="">Selecione...</option>
-                    <option value="operador">Operador (Tudo liberado)</option>
-                    <option value="montador">Montador ("Exibir" e "Finalizar TV" desabilitados)</option>
-                    <option value="visitante">Visitante (Tudo bloqueado, apenas visualiza)</option>
-                </select>
+    <!-- Segundo modal -->
+    <div class="modal-overlay" id="imageModal2">
+        <div class="modal-content-dois">
+            <!-- <img src="imagem04.jpg" alt="Prêmio CENTENA" class="modal-image" id="modalImage2"> -->
+            
+            <div class="modal-buttons">
+                <button class="btn btn-green" id="btnExibir2">Exibir</button>
+                <button class="btn btn-gray" id="btnMinimizar2">Minimizar</button>
+                <button class="btn btn-gray" id="btnEditar2">Editar</button>
             </div>
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" required>
+            
+            <div class="edit-form" id="editForm">
+                <div>
+                    <label for="batida1">1ª Batida:</label>
+                    <input type="text" id="batida2" value="Braga Araújo">
+                </div>
+                <div>
+                    <label for="unidade1">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="Pirapora Nossa/MG | UNIDADE: Sete Lagoas">
+                </div>
+                <div>
+                    <label for="batida2">2ª Batida:</label>
+                    <input type="text" id="batida2" value="Agro Revenda LTDA">
+                </div>
+                <div>
+                    <label for="unidade2">Cidade/UF | Unidade:</label>
+                    <input type="text" id="unidade2" value="SÃO PAULO-SP | UNIDADE: Paulínia">
+                </div>
+                <button class="btn btn-green" style="width: 100%; margin-top: 15px;" id="btnSalvar">Salvar alteração</button>
             </div>
-            <div class="form-group">
-                <label for="emailAgross">Login (email AgRoss):</label>
-                <input type="email" id="emailAgross" pattern=".+@agross\.com\.br" required>
-            </div>
-            <div class="form-group">
-                <label for="senhaCadastro">Senha:</label>
-                <input type="password" id="senhaCadastro" required>
-            </div>
-            <div class="form-group">
-                <label for="repetirSenha">Repetir Senha:</label>
-                <input type="password" id="repetirSenha" required>
-            </div>
-            <button type="submit">Cadastrar</button>
-            <div class="links">
-                <a href="#" onclick="showLogin()">Voltar para Login</a>
-            </div>
-        </form>
+        </div>
     </div>
 
-    <script>
-        // Lista de times brasileiros em ordem alfabética
-        const timesBrasileiros = [
-            "América-MG",
-            "Athletico-PR",
-            "Atlético-GO",
-            "Atlético-MG",
-            "Bahia",
-            "Botafogo",
-            "Ceará",
-            "Corinthians",
-            "Coritiba",
-            "Cruzeiro",
-            "Cuiabá",
-            "Flamengo",
-            "Fluminense",
-            "Fortaleza",
-            "Goiás",
-            "Grêmio",
-            "Internacional",
-            "Juventude",
-            "Palmeiras",
-            "Red Bull Bragantino",
-            "Santos",
-            "São Paulo",
-            "Sport",
-            "Vasco da Gama",
-            "Vitória",
-            "Outro"
-        ];
-
-        function showLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('eventForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
-        }
-
-        function showEventForm() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('eventForm').classList.remove('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
-        }
-
-        function showRegister() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('eventForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.remove('hidden');
-        }
-
-        function showForgotPassword() {
-            alert('Função de recuperação de senha em desenvolvimento.');
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            showEventForm();
-        }
-
-        function populateTimeSelects() {
-            const time1Select = document.getElementById('time1');
-            const time2Select = document.getElementById('time2');
-            
-            // Limpa as opções existentes
-            time1Select.innerHTML = '<option value="">Selecione um time...</option>';
-            time2Select.innerHTML = '<option value="">Selecione um time...</option>';
-            
-            // Adiciona os times às listas
-            timesBrasileiros.forEach(time => {
-                const option1 = document.createElement('option');
-                option1.value = time;
-                option1.textContent = time;
-                time1Select.appendChild(option1);
-                
-                const option2 = document.createElement('option');
-                option2.value = time;
-                option2.textContent = time;
-                time2Select.appendChild(option2);
-            });
-        }
-
-        function handleTimeChange(timeId) {
-            const timeSelect = document.getElementById(timeId);
-            const outroContainer = document.getElementById(`${timeId}OutroContainer`);
-            const outroInput = document.getElementById(`${timeId}Outro`);
-            
-            if (timeSelect.value === 'Outro') {
-                outroContainer.classList.remove('hidden');
-                outroInput.required = true;
-            } else {
-                outroContainer.classList.add('hidden');
-                outroInput.required = false;
-            }
-        }
-
-        function handleEventChange() {
-            const evento = document.getElementById('evento').value;
-            const rodadasBolasContainer = document.getElementById('rodadasBolasContainer');
-            const premiosContainer = document.getElementById('premiosContainer');
-            const palpitePremiado = document.getElementById('palpitePremiado');
-            
-            // Limpa o container de prêmios
-            premiosContainer.innerHTML = '';
-            
-            if (evento === 'TV') {
-                rodadasBolasContainer.classList.add('hidden');
-                palpitePremiado.classList.remove('hidden');
-                
-                // Popula os selects de times
-                populateTimeSelects();
-                
-                // Adiciona campos para TV organizados por sorteio
-                // 1º Sorteio
-                const sorteio1 = document.createElement('div');
-                sorteio1.className = 'sorteio-group';
-                sorteio1.innerHTML = `
-                    <div class="sorteio-title">1º Sorteio:</div>
-                    <div class="premio-input">
-                        <label for="1-sorteio-centena">Centena:</label>
-                        <input type="text" id="1-sorteio-centena" required>
-                    </div>
-                    <div class="premio-input">
-                        <label for="1-sorteio-milhar">Milhar:</label>
-                        <input type="text" id="1-sorteio-milhar" required>
-                    </div>
-                `;
-                premiosContainer.appendChild(sorteio1);
-                
-                // 2º Sorteio
-                const sorteio2 = document.createElement('div');
-                sorteio2.className = 'sorteio-group';
-                sorteio2.innerHTML = `
-                    <div class="sorteio-title">2º Sorteio:</div>
-                    <div class="premio-input">
-                        <label for="2-sorteio-centena">Centena:</label>
-                        <input type="text" id="2-sorteio-centena" required>
-                    </div>
-                    <div class="premio-input">
-                        <label for="2-sorteio-milhar">Milhar:</label>
-                        <input type="text" id="2-sorteio-milhar" required>
-                    </div>
-                `;
-                premiosContainer.appendChild(sorteio2);
-                
-                // 3º Sorteio
-                const sorteio3 = document.createElement('div');
-                sorteio3.className = 'sorteio-group';
-                sorteio3.innerHTML = `
-                    <div class="sorteio-title">3º Sorteio:</div>
-                    <div class="premio-input">
-                        <label for="3-sorteio-centena">Centena:</label>
-                        <input type="text" id="3-sorteio-centena" required>
-                    </div>
-                    <div class="premio-input">
-                        <label for="3-sorteio-milhar">Milhar:</label>
-                        <input type="text" id="3-sorteio-milhar" required>
-                    </div>
-                `;
-                premiosContainer.appendChild(sorteio3);
-                
-                // Prêmio Extra
-                const premioExtra = document.createElement('div');
-                premioExtra.className = 'premio-input';
-                premioExtra.innerHTML = `
-                    <label for="premio-extra">Prêmio Extra:</label>
-                    <input type="text" id="premio-extra" required>
-                `;
-                premiosContainer.appendChild(premioExtra);
-                
-            } else if (['GRV', 'GRR', 'Festao'].includes(evento)) {
-                rodadasBolasContainer.classList.remove('hidden');
-                palpitePremiado.classList.add('hidden');
-                document.getElementById('qtdRodadas').value = '';
-                document.getElementById('qtdBolas').value = '';
-            }
-        }
-
-        function handleRodadasChange() {
-            const qtdRodadas = parseInt(document.getElementById('qtdRodadas').value);
-            const premiosContainer = document.getElementById('premiosContainer');
-            
-            // Limpa o container de prêmios
-            premiosContainer.innerHTML = '';
-            
-            // Adiciona campos de prêmios baseado no número de rodadas
-            for (let i = 1; i <= qtdRodadas; i++) {
-                const div = document.createElement('div');
-                div.className = 'premio-input';
-                div.innerHTML = `
-                    <label for="premio-rodada-${i}">Prêmio ${i}ª rodada:</label>
-                    <input type="text" id="premio-rodada-${i}" required>
-                `;
-                premiosContainer.appendChild(div);
-            }
-        }
-
-        function handleEventSubmit(event) {
-            event.preventDefault();
-            
-            // Validações
-            const evento = document.getElementById('evento').value;
-            if (['GRV', 'GRR', 'Festao'].includes(evento)) {
-                const qtdRodadas = document.getElementById('qtdRodadas').value;
-                const qtdBolas = document.getElementById('qtdBolas').value;
-                
-                if (qtdRodadas > 99) {
-                    alert('A quantidade de rodadas não pode ser maior que 99!');
-                    return;
-                }
-                if (qtdBolas > 999) {
-                    alert('A quantidade de bolas não pode ser maior que 999!');
-                    return;
-                }
-            } else if (evento === 'TV') {
-                // Validação para Palpite Premiado
-                const time1 = document.getElementById('time1').value;
-                const time2 = document.getElementById('time2').value;
-                
-                if (time1 === time2 && time1 !== 'Outro') {
-                    alert('Os times 1 e 2 não podem ser iguais!');
-                    return;
-                }
-                
-                if (time1 === 'Outro' && !document.getElementById('time1Outro').value) {
-                    alert('Por favor, informe o nome do Time 1!');
-                    return;
-                }
-                
-                if (time2 === 'Outro' && !document.getElementById('time2Outro').value) {
-                    alert('Por favor, informe o nome do Time 2!');
-                    return;
-                }
-            }
-            
-            // Redirecionar para painel.html
-            console.log("Redirecionando para painel.html");
-            
-            // Forçar o redirecionamento de duas maneiras diferentes para garantir que funcione
-            try {
-                window.location.href = 'painel.html';
-                
-                // Se o redirecionamento acima não funcionar, tente este após um pequeno atraso
-                setTimeout(function() {
-                    window.location.replace('painel.html');
-                }, 100);
-            } catch (e) {
-                console.error("Erro ao redirecionar:", e);
-                alert("Erro ao redirecionar. Tentando novamente...");
-                window.location = 'painel.html';
-            }
-        }
-
-        function handleRegister(event) {
-            event.preventDefault();
-            const senha = document.getElementById('senhaCadastro').value;
-            const repetirSenha = document.getElementById('repetirSenha').value;
-            const email = document.getElementById('emailAgross').value;
-
-            if (senha !== repetirSenha) {
-                alert('As senhas não coincidem!');
-                return;
-            }
-
-            if (!email.endsWith('@agross.com.br')) {
-                alert('Por favor, use um email AgRoss válido.');
-                return;
-            }
-
-            alert('Um email de confirmação foi enviado para o Marketing AgRoss, aguarde a liberação.');
-            showLogin();
-        }
-    </script>
+    <script src="painel.js"></script>
+  
 </body>
 </html>
