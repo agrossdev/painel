@@ -603,6 +603,19 @@ function updateBackgroundForCentenaEMilhar() {
     if(countCentena >= 5){
         primeiroSorteioImgDois.style.backgroundImage = "url('Roleta.png')";
         primeiroSorteioImgDois.style.backgroundSize = 'cover';
+        const a = document.createElement('a');
+        primeiroSorteioImgDois.appendChild(a);
+        a.href = "https://agrossdev.github.io/roleta/";
+        a.target = "_blank";
+        a.style.display = "block";
+        a.style.width = "100%";
+        a.style.height = "100%";
+        a.style.position = "absolute";
+        a.style.top = "0";
+        a.style.left = "0";
+        modal2.style.zIndex = "-10";
+        modal2.style.display = 'none';
+        modalContent2.style.display = 'none';
     }
 
 }
