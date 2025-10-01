@@ -476,7 +476,6 @@ function filterPossibilidadesAndMoveToBatidas() {
 
     // Track rows already added to Batidas to avoid duplication
     const addedRows = new Set();
-
     // Iterate over Possibilidades table rows
     possibilidadesTable.querySelectorAll('tr').forEach(tr => {
         const tds = tr.querySelectorAll('td');
@@ -589,12 +588,20 @@ function updateBackgroundForCentenaEMilhar() {
         primeiroSorteioImg.style.backgroundImage = "url('Bola-Maior-Milhar.jpg')";
         primeiroSorteioImg.style.backgroundSize = 'cover';
     }
+    if(countMilhar >= 5){
+        primeiroSorteioImg.style.backgroundImage = "url('Roleta.png')";
+        primeiroSorteioImg.style.backgroundSize = 'cover';
+    }
     if(countCentena == 1){
         primeiroSorteioImgDois.style.backgroundImage = "url('Ganhador-Centena.jpg')";
         primeiroSorteioImgDois.style.backgroundSize = 'cover';
     }
     if(countCentena > 1){
         primeiroSorteioImgDois.style.backgroundImage = "url('Bola-Maior-Centena.jpg')";
+        primeiroSorteioImgDois.style.backgroundSize = 'cover';
+    }
+    if(countCentena >= 5){
+        primeiroSorteioImgDois.style.backgroundImage = "url('Roleta.png')";
         primeiroSorteioImgDois.style.backgroundSize = 'cover';
     }
 
@@ -688,47 +695,47 @@ document.querySelectorAll('.number-box input').forEach(input => {
 });
 
 // Função para limitar a seleção de checkboxes
-function limitarSelecaoCheckboxes(tipo, limite) {
-    const checkboxes = document.querySelectorAll(`#batidasTable tbody input[type="checkbox"]`);
+// function limitarSelecaoCheckboxes(tipo, limite) {
+//     const checkboxes = document.querySelectorAll(`#batidasTable tbody input[type="checkbox"]`);
 
-    let count = 0;
-    checkboxes.forEach(checkbox => {
-        const linha = checkbox.closest('tr');
-        const nfCell = linha.querySelector('td.nf');
-        if (nfCell && nfCell.querySelector(`.nf-${tipo}`)) {
-            if (checkbox.checked) {
-                count++;
-            }
-        }
-    });
+//     let count = 0;
+//     checkboxes.forEach(checkbox => {
+//         const linha = checkbox.closest('tr');
+//         const nfCell = linha.querySelector('td.nf');
+//         if (nfCell && nfCell.querySelector(`.nf-${tipo}`)) {
+//             if (checkbox.checked) {
+//                 count++;
+//             }
+//         }
+//     });
 
-    if (count > limite) {
-        alert(`Você só pode selecionar até ${limite} checkboxes do tipo ${tipo}.`);
-        return false;
-    }
+//     if (count > limite) {
+//         alert(`Você só pode selecionar até ${limite} checkboxes do tipo ${tipo}.`);
+//         return false;
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 // Adicionar evento para limitar a seleção
-batidasTable.addEventListener('change', (event) => {
-    if (event.target && event.target.matches('input[type="checkbox"]')) {
-        const linha = event.target.closest('tr');
-        const nfCell = linha.querySelector('td.nf');
+// batidasTable.addEventListener('change', (event) => {
+//     if (event.target && event.target.matches('input[type="checkbox"]')) {
+//         const linha = event.target.closest('tr');
+//         const nfCell = linha.querySelector('td.nf');
 
-        if (nfCell) {
-            if (nfCell.querySelector('.nf-milhar')) {
-                if (!limitarSelecaoCheckboxes('milhar', 4)) {
-                    event.target.checked = false;
-                }
-            } else if (nfCell.querySelector('.nf-centena')) {
-                if (!limitarSelecaoCheckboxes('centena', 4)) {
-                    event.target.checked = false;
-                }
-            }
-        }
-    }
-});
+//         if (nfCell) {
+//             if (nfCell.querySelector('.nf-milhar')) {
+//                 if (!limitarSelecaoCheckboxes('milhar', 4)) {
+//                     event.target.checked = false;
+//                 }
+//             } else if (nfCell.querySelector('.nf-centena')) {
+//                 if (!limitarSelecaoCheckboxes('centena', 4)) {
+//                     event.target.checked = false;
+//                 }
+//             }
+//         }
+//     }
+// });
 
 // Função para impedir a seleção de checkboxes com a classe cliente-nadimplete
 function impedirSelecaoClientesNadimplete(event) {
@@ -742,4 +749,4 @@ function impedirSelecaoClientesNadimplete(event) {
 }
 
 // Adicionar evento para impedir a seleção
-batidasTable.addEventListener('change', impedirSelecaoClientesNadimplete);
+// batidasTable.addEventListener('change', impedirSelecaoClientesNadimplete);

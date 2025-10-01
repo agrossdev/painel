@@ -299,14 +299,14 @@ th.fixed-column {
     flex-shrink: 0;
 }
 
-/* .inadimplente-red {
+.inadimplente-red {
     color: red;
     font-weight: bold;
-} */
+} 
 
-/* .cliente-inadimplente td {
+.cliente-inadimplente td {
     color: red;
-} */
+} 
 
 .sorteio-section {
     margin-bottom: 15px;
