@@ -268,6 +268,7 @@ function exibirDadosClientesCentena() {
         let msg = 'Ganhador';
         let classe = '';
         const clienteDiv = document.createElement('div');
+        clienteDiv.classList.add('single');
         if(clientesCentena.length > 1){
             msg = `${cont}º batida`;
             classe = 'borda';

@@ -401,7 +401,7 @@ th.fixed-column {
     padding: 2rem 2rem 0 2rem;
 }
 .modal-box .box{
-    padding: 2rem 2rem 0 2rem;
+    padding: 1rem 1rem 0 1rem;
     background-color: #fff;
     max-width: 90%;
     max-height: 90%;
@@ -473,16 +473,19 @@ th.fixed-column {
 
 .container-cliente-info{
     display: flex;
-    gap: 10px;
-    padding-top: 9rem;
+    gap: 10px 40px;
+    padding-top: 16rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .container-cliente-info .single{
-    padding-top: 120px;
+    /* padding-top: 120px; */
+    flex: 0 1 36%;
 }
 
 .cliente-info.borda{
-    border: 1px solid #3b8727;
+    border: 5px solid #3b8727;
 }
 
 .cliente-info{
@@ -500,7 +503,7 @@ th.fixed-column {
 .cliente-info p {
     color: #000;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 10px;
     font-size: 1rem;
     text-align: center;
 }
