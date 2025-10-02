@@ -397,6 +397,16 @@ document.getElementById('btnSalvar').addEventListener('click', function() {
     editForm.style.display = 'none';
 });
 
+// Salvar form2
+document.getElementById('btnSalvar2').addEventListener('click', function() {
+    alert('Alterações salvas com sucesso!');
+    // Here you would typically update the data in the backend
+    // For now, we'll just hide the form
+    editForm2.style.display = 'none';
+});
+document.getElementById('fechar2').addEventListener('click', function() {
+    editForm2.style.display = 'none';
+});
 // Fechar o segundo modal ao clicar fora dele
 modal2.addEventListener('click', function(e) {
     if (e.target === modal2) {
