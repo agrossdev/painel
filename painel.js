@@ -77,6 +77,7 @@ const btnExibir = document.getElementById('btnExibir');
 const btnMinimizar = document.getElementById('btnMinimizar');
 const btnEditar = document.getElementById('btnEditar');
 const modalContent = document.querySelector('.modal-content');
+
 // Segundo modal
 const modal2 = document.getElementById('imageModal2');
 const modalImage2 = document.getElementById('modalImage2');
@@ -87,104 +88,103 @@ const btnEditar2 = document.getElementById('btnEditar2');
 const modalContent2 = document.querySelector('.modal-content-dois');
 
 // Função para exibir os dados dos clientes selecionados no modal como divs
-function exibirDadosClientesSelecionados() {
-    const checkboxesSelecionados = document.querySelectorAll('#batidasTable tbody input[type="checkbox"]:checked');
-    const modalContent = document.querySelector('.modal-content');
+// function exibirDadosClientesSelecionados() {
+//     const checkboxesSelecionados = document.querySelectorAll('#batidasTable tbody input[type="checkbox"]:checked');
+//     const modalContent = document.querySelector('.modal-content');
 
-    // Limpar conteúdo anterior do modal
-    modalContent.innerHTML = '';
+//     // Limpar conteúdo anterior do modal
+//     modalContent.innerHTML = '';
 
-    if (checkboxesSelecionados.length === 0) {
-        modalContent.innerHTML = '<p>Nenhum cliente selecionado.</p>';
-        return;
-    }
+//     if (checkboxesSelecionados.length === 0) {
+//         modalContent.innerHTML = '<p>Nenhum cliente selecionado.</p>';
+//         return;
+//     }
 
-    // Criar um container para os dados
-    const container = document.createElement('div');
-    container.classList.add('container-cliente-info');
-    // container.style.display = 'flex';
-    // container.style.flexDirection = 'column';
-    // container.style.gap = '10px';
-    let cont = 0;
-    checkboxesSelecionados.forEach(checkbox => {
-        cont++;
-        const linha = checkbox.closest('tr');
-        const dadosCliente = linha.querySelectorAll('td');
+//     // Criar um container para os dados
+//     const container = document.createElement('div');
+//     container.classList.add('container-cliente-info');
+//     // container.style.display = 'flex';
+//     // container.style.flexDirection = 'column';
+//     // container.style.gap = '10px';
+//     let cont = 0;
+//     checkboxesSelecionados.forEach(checkbox => {
+//         cont++;
+//         const linha = checkbox.closest('tr');
+//         const dadosCliente = linha.querySelectorAll('td');
 
-        const razaoSocial = dadosCliente[1]?.textContent.trim() || '';
-        const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
-        const nfCarne = dadosCliente[4]?.textContent.trim() || '';
-        const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
+//         const razaoSocial = dadosCliente[1]?.textContent.trim() || '';
+//         const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
+//         const nfCarne = dadosCliente[4]?.textContent.trim() || '';
+//         const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
 
-        const clienteDiv = document.createElement('div');
-        // clienteDiv.classList.add('cliente-info');
-        // clienteDiv.style.border = '1px solid #ddd';
-        // clienteDiv.style.padding = '10px';
-        // clienteDiv.style.borderRadius = '5px';
-        // clienteDiv.style.backgroundColor = '#f9f9f9';
+//         const clienteDiv = document.createElement('div');
+//         // clienteDiv.classList.add('cliente-info');
+//         // clienteDiv.style.border = '1px solid #ddd';
+//         // clienteDiv.style.padding = '10px';
+//         // clienteDiv.style.borderRadius = '5px';
+//         // clienteDiv.style.backgroundColor = '#f9f9f9';
 
-        clienteDiv.innerHTML = `
-            <h4 class="title">${cont}º batida</h4>
-            <div class="cliente-info">
-            <p><strong>Razão Social:</strong> ${razaoSocial}</p>
-            <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
-            <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
-            <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
-        </div>`;
+//         clienteDiv.innerHTML = `
+//             <h4 class="title">${cont}º batida</h4>
+//             <div class="cliente-info">
+//             <p><strong>Razão Social:</strong> ${razaoSocial}</p>
+//             <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
+//             <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
+//             <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
+//         </div>`;
+//         console.log("oi");
+//         container.appendChild(clienteDiv);
+//     });
 
-        container.appendChild(clienteDiv);
-    });
-
-    modalContent.appendChild(container);
-}
+//     modalContent.appendChild(container);
+// }
 
 // Função para exibir os dados dos clientes selecionados no segundo modal como divs
-function exibirDadosClientesSelecionadosModal2() {
-    const checkboxesSelecionados = document.querySelectorAll('#batidasTable tbody input[type="checkbox"]:checked');
-    const modalContent2 = document.querySelector('.modal-content-dois');
+// function exibirDadosClientesSelecionadosModal2() {
+//     const checkboxesSelecionados = document.querySelectorAll('#batidasTable tbody input[type="checkbox"]:checked');
+//     const modalContent2 = document.querySelector('.modal-content-dois');
 
-    // Limpar conteúdo anterior do modal
-    modalContent2.innerHTML = '';
+//     // Limpar conteúdo anterior do modal
+//     modalContent2.innerHTML = '';
 
-    if (checkboxesSelecionados.length === 0) {
-        modalContent2.innerHTML = '<p>Nenhum cliente selecionado.</p>';
-        return;
-    }
+//     if (checkboxesSelecionados.length === 0) {
+//         modalContent2.innerHTML = '<p>Nenhum cliente selecionado.</p>';
+//         return;
+//     }
 
-    // Criar um container para os dados
-    const container = document.createElement('div');
-    container.classList.add('container-cliente-info');
-    let cont = 0;
-    checkboxesSelecionados.forEach(checkbox => {
-        cont++;
-        const linha = checkbox.closest('tr');
-        const dadosCliente = linha.querySelectorAll('td');
+//     // Criar um container para os dados
+//     const container = document.createElement('div');
+//     container.classList.add('container-cliente-info');
+//     let cont = 0;
+//     checkboxesSelecionados.forEach(checkbox => {
+//         cont++;
+//         const linha = checkbox.closest('tr');
+//         const dadosCliente = linha.querySelectorAll('td');
 
-        const razaoSocial = dadosCliente[1]?.textContent.trim() || '';
-        const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
-        const nfCarne = dadosCliente[4]?.textContent.trim() || '';
-        const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
+//         const razaoSocial = dadosCliente[1]?.textContent.trim() || '';
+//         const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
+//         const nfCarne = dadosCliente[4]?.textContent.trim() || '';
+//         const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
 
-        const clienteDiv = document.createElement('div');
-        clienteDiv.innerHTML = `
-            <h4 class="title">${cont}º batida</h4>
-            <div class="cliente-info">
-            <p><strong>Razão Social:</strong> ${razaoSocial}</p>
-            <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
-            <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
-            <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
-        </div>`;
+//         const clienteDiv = document.createElement('div');
+//         clienteDiv.innerHTML = `
+//             <h4 class="title">${cont}º batida</h4>
+//             <div class="cliente-info">
+//             <p><strong>Razão Social:</strong> ${razaoSocial}</p>
+//             <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
+//             <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
+//             <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
+//         </div>`;
 
-        container.appendChild(clienteDiv);
-    });
-
-    modalContent2.appendChild(container);
-}
+//         container.appendChild(clienteDiv);
+//     });
+//     modalContent2.appendChild(container);
+// }
 
 // Função para exibir os dados dos clientes selecionados no primeiro modal (Milhar)
 function exibirDadosClientesMilhar() {
     const checkboxesSelecionados = document.querySelectorAll('#batidasTable tbody input[type="checkbox"]:checked');
-    const modalContent = document.querySelector('.modal-content');
+    const modalContent = document.querySelector('.modalcontainer1');
 
     // Limpar conteúdo anterior do modal
     modalContent.innerHTML = '';
@@ -212,20 +212,25 @@ function exibirDadosClientesMilhar() {
         const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
         const nfCarne = dadosCliente[4]?.textContent.trim() || '';
         const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
-
+        let msg = 'Ganhador';
+        let classe = '';
         const clienteDiv = document.createElement('div');
+        if(clientesMilhar.length > 1){
+            msg = `${cont}º batida`;
+            classe = 'borda';
+            // clienteDiv.classList.add('borda');
+        }
         clienteDiv.innerHTML = `
-            <h4 class="title">${cont}º batida</h4>
-            <div class="cliente-info">
-            <p><strong>Razão Social:</strong> ${razaoSocial}</p>
-            <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
-            <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
-            <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
+            <h4 class="title">${msg}</h4>
+            <div class="cliente-info ${classe}">
+            <h5>${razaoSocial}</h5>
+            <p>${cidadeUf}</p>
         </div>`;
-
-        container.appendChild(clienteDiv);
+        if(clientesMilhar.length <= 4){
+            container.appendChild(clienteDiv);
+        }
     });
-
+    
     modalContent.appendChild(container);
 }
 
@@ -260,18 +265,23 @@ function exibirDadosClientesCentena() {
         const nomeFantasia = dadosCliente[2]?.textContent.trim() || '';
         const nfCarne = dadosCliente[4]?.textContent.trim() || '';
         const cidadeUf = dadosCliente[6]?.textContent.trim() || '';
-
+        let msg = 'Ganhador';
+        let classe = '';
         const clienteDiv = document.createElement('div');
+        if(clientesCentena.length > 1){
+            msg = `${cont}º batida`;
+            classe = 'borda';
+            // clienteDiv.classList.add('borda');
+        }
         clienteDiv.innerHTML = `
-            <h4 class="title">${cont}º batida</h4>
-            <div class="cliente-info">
-            <p><strong>Razão Social:</strong> ${razaoSocial}</p>
-            <p><strong>Nome Fantasia:</strong> ${nomeFantasia}</p>
-            <p><strong>NF/Carnê:</strong> ${nfCarne}</p>
-            <p><strong>Cidade/UF:</strong> ${cidadeUf}</p>
+            <h4 class="title">${msg}</h4>
+            <div class="cliente-info ${classe}">
+            <h5>${razaoSocial}</h5>
+            <p>${cidadeUf}</p>
         </div>`;
-
-        container.appendChild(clienteDiv);
+        if(clientesCentena.length <= 4){
+            container.appendChild(clienteDiv);
+        }
     });
 
     modalContent2.appendChild(container);
@@ -297,13 +307,18 @@ document.getElementById('primeiro-sorteio-img').addEventListener('click', functi
     });
 
     // Alterar o background-image do modal-content com base na quantidade de ganhadores do tipo "Milhar"
+    if(countMilhar >= 5) {
+        modalContent.style.backgroundImage = "url('Roleta.png')"; // Imagem para nenhum ganhador da milhar
+        modalContent.style.backgroundSize = 'cover';
+    }
     if (countMilhar > 1) {
         modalContent.style.backgroundImage = "url('Bola-Maior-Milhar.jpg')";
         modalContent.style.backgroundSize = 'cover';
-    } else if (countMilhar === 1) {
+    } if (countMilhar === 1) {
         modalContent.style.backgroundImage = "url('Ganhador-Milhar.jpg')"; // Imagem para um único ganhador da milhar
         modalContent.style.backgroundSize = 'cover';
-    } else {
+    }
+     if(countMilhar === 0) {
         modalContent.style.backgroundImage = '';
     }
 });
@@ -330,10 +345,14 @@ document.getElementById('primeiro-sorteio-img-dois').addEventListener('click', f
     if (countCentena > 1) {
         modalContent2.style.backgroundImage = "url('Bola-Maior-Centena.jpg')";
         modalContent2.style.backgroundSize = 'cover';
-    } else if (countCentena === 1) {
+    } if(countCentena > 4) {
+        modalContent2.style.backgroundImage = "url('Roleta.png')"; // Imagem para nenhum ganhador da centena
+        modalContent2.style.backgroundSize = 'cover';
+    }
+    if (countCentena === 1) {
         modalContent2.style.backgroundImage = "url('Ganhador-Centena.jpg')"; // Imagem para um único ganhador da centena
         modalContent2.style.backgroundSize = 'cover';
-    } else {
+    } if(countCentena === 0) {
         modalContent2.style.backgroundImage = '';
     }
 });
@@ -382,7 +401,7 @@ document.getElementById('btnSalvar').addEventListener('click', function() {
 modal2.addEventListener('click', function(e) {
     if (e.target === modal2) {
         modal2.style.display = 'none';
-        editForm2.style.display = 'none';
+        // editForm2.style.display = 'none';
     }
 });
 
@@ -603,19 +622,19 @@ function updateBackgroundForCentenaEMilhar() {
     if(countCentena >= 5){
         primeiroSorteioImgDois.style.backgroundImage = "url('Roleta.png')";
         primeiroSorteioImgDois.style.backgroundSize = 'cover';
-        const a = document.createElement('a');
-        primeiroSorteioImgDois.appendChild(a);
-        a.href = "https://agrossdev.github.io/roleta/";
-        a.target = "_blank";
-        a.style.display = "block";
-        a.style.width = "100%";
-        a.style.height = "100%";
-        a.style.position = "absolute";
-        a.style.top = "0";
-        a.style.left = "0";
-        modal2.style.zIndex = "-10";
-        modal2.style.display = 'none';
-        modalContent2.style.display = 'none';
+        // const a = document.createElement('a');
+        // primeiroSorteioImgDois.appendChild(a);
+        // a.href = "https://agrossdev.github.io/roleta/";
+        // a.target = "_blank";
+        // a.style.display = "block";
+        // a.style.width = "100%";
+        // a.style.height = "100%";
+        // a.style.position = "absolute";
+        // a.style.top = "0";
+        // a.style.left = "0";
+        // modal2.style.zIndex = "-10";
+        // modal2.style.display = 'none';
+        // modalContent2.style.display = 'none';
     }
 
 }
